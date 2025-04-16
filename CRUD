@@ -1,0 +1,149 @@
+#Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ //postlab Write a Python program to create, read, and delete data/task added 
+from an SQLite database
+ within a Tkinter application.
+ import sqlite3
+ import tkinter as tk
+ from tkinter import messagebox
+ # Ensure database and table are created before performing any operations
+ def connect_db():
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+    cursor.execute("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, 
+task TEXT)")
+    conn.commit()
+    conn.close()
+ def add_task():
+    task = task_entry.get()
+    if task:
+        conn = sqlite3.connect("tasks.db")
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO tasks (task) VALUES (?)", (task,))
+        conn.commit()
+        conn.close()
+        task_entry.delete(0, tk.END)
+        show_tasks()
+    else:
+        messagebox.showwarning("Warning", "Task cannot be empty!")
+ def show_tasks():
+    task_list.delete(0, tk.END)
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tasks")  # Ensure table exists before querying
+    tasks = cursor.fetchall()
+    conn.close()
+    for task in tasks:
+        task_list.insert(tk.END, f"{task[0]}: {task[1]}")
+ def delete_task():
+    selected_task = task_list.get(tk.ACTIVE)
+    if selected_task:
+        task_id = selected_task.split(":")[0]
+        conn = sqlite3.connect("tasks.db")
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM tasks WHERE id=?", (task_id,))
+        conn.commit()
+        conn.close()
+        show_tasks()
+    else:
+        messagebox.showwarning("Warning", "No task selected!")
+ # GUI Setup
+ root = tk.Tk()
+ root.title("Task Manager")
+ root.geometry("400x400")
+ # Connect to DB before showing tasks
+ connect_db()
+ task_entry = tk.Entry(root, width=40)
+ task_entry.pack(pady=10)
+ task_add_button = tk.Button(root, text="Add Task", command=add_task)
+ task_add_button.pack()
+ task_list = tk.Listbox(root, width=50)
+ task_list.pack(pady=10)
+ delete_button = tk.Button(root, text="Delete Task", command=delete_task)
+ delete_button.pack()
+ show_tasks()  # Now it's safe to call after table creation
+ root.mainloop()
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ # WAP to demonstrate CRUD (create,read,update,delete) operation on database 
+using sqlite3
+ import sqlite3
+ n=0
+ while(n!=7):
+    print(" 1.Create\n 2.Insert\n 3.Select\n 4.Update\n 5.Delete\n 6.Drop 
+table\n 7.Exit")
+    n=int(input("Enter your operation"))
+    if (n==1):
+        # create table in database
+        conn=sqlite3.Connection("Test.db")
+        print ("opened database successfully")
+        conn.execute("create table Factory (ID int primary key not null,NAME 
+text not null, AGE int not null, ADDRESS char(50),SALARY real);")
+        print("Table created successfully")
+        conn.close()
+    if (n==2):
+        # insert into database
+        conn=sqlite3.Connection("Test.db")
+        print ("opened database successfully")
+        conn.execute("insert into Factory (ID,NAME,AGE,ADDRESS,SALARY) values 
+(1,'virat kohli',28,'RCB',2000000.0)")
+        conn.execute("insert into Factory (ID,NAME,AGE,ADDRESS,SALARY) values 
+(2,'Rohit Sharma',30,'MI',4000000.0)")
+        conn.execute("insert into Factory (ID,NAME,AGE,ADDRESS,SALARY) values 
+(3,'Mohd Shami',32,'KXIP',6000000.0)")
+        conn.execute("insert into Factory (ID,NAME,AGE,ADDRESS,SALARY) values 
+(4,'Bhuvneshwar',27,'SH',6000000.0)")
+        conn.commit()
+        print("Insert Operation Done successfully")
+        conn.close()
+    if (n==3):
+        # select from database
+        conn=sqlite3.Connection("Test.db")
+        print ("opened database successfully")
+        cursor=conn.execute("select ID,NAME,AGE,ADDRESS,SALARY from Factory")
+        for row in cursor:
+            print("ID=",row[0])
+            print("NAME=",row[1])
+            print("AGE=",row[2])
+            print("ADDRESS=",row[3])
+            print("SALARY=",row[4],"\n")
+            print("select Done Successfully")
+        conn.close()
+    if(n==4):
+        # update database
+        conn=sqlite3.Connection("Test.db")
+        print ("opened database successfully")
+        conn.execute("update Factory set SALARY=250000.0 where ID=1")
+        conn.commit()
+        print("Total number of rows updated:",conn.total_changes)
+        cursor=conn.execute("select ID,NAME,AGE,ADDRESS,SALARY from Factory")
+        for row in cursor:
+            print("ID=",row[0])
+            print("NAME=",row[1])
+            print("AGE=",row[2])
+            print("ADDRESS=",row[3])
+            print("SALARY=",row[4],"\n")
+            print("Update Done Successfully")
+        conn.close();
+    if (n==5):
+        # delete database
+        conn=sqlite3.Connection("Test.db")
+        print ("opened database successfully")
+        conn.execute("delete from Factory where ID=2;")
+        cursor=conn.execute("select ID,NAME,AGE,ADDRESS,SALARY from Factory")
+        for row in cursor:
+            print("ID=",row[0])
+            print("NAME=",row[1])
+            print("AGE=",row[2])
+            print("ADDRESS=",row[3])
+            print("SALARY=",row[4],"\n")
+            print("delete Done Successfully")
+        conn.close();
+    if (n==6):
+        conn=sqlite3.Connection("Test.db")
+        print ("opened database successfully")
+        conn.execute("drop table Factory")
+        print("deleted Successfully")
+        conn.close();

@@ -1,0 +1,66 @@
+# Exp 13 
+# Program: Write a program in python to find transpose and find diagonal elements 
+# of a matrix.
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ from numpy import *
+ # Input rows and columns
+ r, c = map(int, input("Enter rows and columns: ").split())
+ # Input matrix elements
+ matrix_elements = list(map(int, input("Enter matrix elements: ").split()))
+ # Create and reshape the array
+ x = array(matrix_elements).reshape(r, c)
+ # Display the original matrix
+ print("Original matrix:")
+ print(x)
+ # Display the transpose of the matrix
+ print("Transpose matrix:")
+ print(x.T)
+ # Display the diagonal elements of the matrix
+ print("Diagonal of the matrix:")
+ print(diagonal(x))
+ //postlab Write a program to perform matrix multiplication?
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ from numpy import *
+ # Input for size of matrices
+ n = int(input("Enter the size of square matrices (or 0 for different sizes): "))
+ if n > 0:
+    # If square matrices are chosen
+    A = array(list(map(int, input("Enter elements of first square matrix: 
+").split()))).reshape(n, n)
+    B = array(list(map(int, input("Enter elements of second square matrix: 
+").split()))).reshape(n, n)
+ else:
+    # If matrices of different sizes are chosen
+    r1, c1 = map(int, input("Enter rows and columns of first matrix: ").split())
+    A = array(list(map(int, input("Enter elements of first matrix: 
+").split()))).reshape(r1, c1)
+    r2, c2 = map(int, input("Enter rows and columns of second matrix: 
+").split())
+    B = array(list(map(int, input("Enter elements of second matrix: 
+").split()))).reshape(r2, c2)
+    # Check matrix multiplication compatibility
+    if A.shape[1] != B.shape[0]:
+        print("Matrix multiplication not possible")
+    else:
+        print("Resultant matrix:")
+        print(dot(A, B))
+ // postlab Write a program to perform transpose of a matrix?
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ from numpy import *
+ # Input for rows and columns of the matrix
+ r, c = map(int, input("Enter rows and columns of the matrix: ").split())
+ # Input matrix elements
+ A = array(list(map(int, input("Enter matrix elements: ").split()))).reshape(r, 
+c)
+ # Display the original matrix
+ print("Original matrix:")
+ print(A)
+ # Display the transpose of the matrix
+ print("Transpose of the matrix:")
+ print(A.T)

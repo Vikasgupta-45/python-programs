@@ -1,0 +1,78 @@
+#Name:Shaikh Maviya 
+#UIN: 231P050
+#Roll No: 37
+ from threading import *
+ from time import *
+ class Theatre:
+    def __init__(self, str):
+        self.str = str
+    def movieshow(self):
+        for i in range(1, 6):
+            print(self.str, ":", i)
+            sleep(0.5)
+ obj1 = Theatre("Cut Ticket")
+ obj2 = Theatre("Show Chair")
+ t1 = Thread(target=obj1.movieshow)
+ t2 = Thread(target=obj2.movieshow)
+ t1.start()
+ t2.start()
+ //postlab Write a program for single thread.
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ from time import sleep
+ def task1():
+    print("Task 1: Starting...")
+    sleep(2)
+    print("Task 1: Completed.")
+ def task2():
+    print("Task 2: Starting...")
+    sleep(3)
+    print("Task 2: Completed.")
+ def task3():
+    print("Task 3: Starting...")
+    sleep(1)
+    print("Task 3: Completed.")
+ def main():
+    print("Starting tasks...\n")
+    task1()
+    task2()
+    task3()
+    print("\nAll tasks completed.")
+ main()
+ // postlab Write a program for multiple thread.
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ from threading import Thread
+ from time import sleep
+ def task1():
+    for i in range(3):
+        print(f"Task 1 - Step {i+1}")
+        sleep(1)
+ def task2():
+    for i in range(3):
+        print(f"Task 2 - Step {i+1}")
+        sleep(2)
+ def task3():
+    for i in range(3):
+        print(f"Task 3 - Step {i+1}")
+        sleep(1.5)
+ def main():
+    print("Starting threads...\n")
+    # Creating threads for each task
+    thread1 = Thread(target=task1)
+    thread2 = Thread(target=task2)
+    thread3 = Thread(target=task3)
+    # Starting threads
+    thread1.start()
+    thread2.start()
+    thread3.start()
+    # Waiting for threads to complete
+    thread1.join()
+    thread2.join()
+    thread3.join()
+    print("\nAll threads completed.")
+ if __name__ == "__main__":
+    main()
+ 

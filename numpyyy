@@ -1,0 +1,76 @@
+
+#  Write a menu driven program in python to perform basic mathematical operations 
+# on two
+#  polynomials or integers using NumPy.
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ import numpy as np
+ def main():
+    while True:
+        choice = input("\nMenu:\n1. Polynomial Operations\n2. Integer 
+Operations\n3. Exit\nEnter your choice: ")
+        if choice == '1':
+            # Polynomial Operations
+            poly1 = np.poly1d(list(map(int, input("Enter first polynomial 
+coefficients: ").split())))
+            poly2 = np.poly1d(list(map(int, input("Enter second polynomial 
+coefficients: ").split())))
+            operation = input("\n1. Add\n2. Subtract\n3. Multiply\n4. 
+Divide\nChoose operation: ")
+            if operation == '1':
+                print("Result:", poly1 + poly2)
+            elif operation == '2':
+                print("Result:", poly1 - poly2)
+            elif operation == '3':
+                print("Result:", poly1 * poly2)
+            elif operation == '4':
+                result, remainder = np.polydiv(poly1, poly2)
+                print("Quotient:", result)
+                print("Remainder:", remainder)
+            else:
+                print("Invalid operation.")
+        elif choice == '2':
+            # Integer Operations
+            num1 = int(input("Enter first integer: "))
+            num2 = int(input("Enter second integer: "))
+            operation = input("\n1. Add\n2. Subtract\n3. Multiply\n4. 
+Divide\nChoose operation: ")
+            if operation == '1':
+                print("Result:", num1 + num2)
+            elif operation == '2':
+                print("Result:", num1 - num2)
+            elif operation == '3':
+                print("Result:", num1 * num2)
+            elif operation == '4':
+                if num2 != 0:
+                    print("Result:", num1 / num2)
+                else:
+                    print("Cannot divide by zero.")
+            else:
+                print("Invalid operation.")
+        elif choice == '3':
+            # Exit the program
+            print("Exiting the program. Goodbye!")
+            break
+        else:
+            print("Invalid choice.")
+ if __name__ == "__main__":
+    main()
+ //postlab How to get the common items between two python numpy arrays
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ import numpy as np
+ array1 = np.array([1, 2, 3, 4, 5])
+ array2 = np.array([4, 5, 6, 7, 8])
+ common_items = np.intersect1d(array1, array2)
+ print("Common items:", common_items)
+ // postlab  How to limit the number of items printed in output of numpy array?
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+import numpy as np
+ large_array = np.arange(100)
+ np.set_printoptions(threshold=10)  # Limit the number of elements printed
+ print(large_array)

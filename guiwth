@@ -1,0 +1,100 @@
+# Ep-8  
+# Maviya shaikh 
+# Roll no: 37 
+# Batch-2 
+import socket import tkinter as 
+tk from tkinter import 
+messagebox  
+def start_client():  
+try:  
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)         
+client_socket.connect(("127.0.0.1", 12345))        
+client_socket.recv(1024)        
+{message.decode()}")        
+client!".encode())        
+print(f"Error: {e}")  
+def on_submit():  
+ client_socket.close()    
+name = entry_name.get()     age = 
+entry_age.get()     gender = 
+var_gender.get()    
+var_subscribe.get()  
+ is_subscribed = 
+ message = 
+ print(f"Received from server: 
+ client_socket.send("Hello from the 
+ except Exception as e:         
+messagebox.showinfo("Submitted Information", f"Name: {name}\nAge: {age}\nGender: 
+{gender}\nSubscribed:  
+{is_subscribed}") 
+def 
+custom_dialog():  
+response = messagebox.askyesno("Custom Dialog", "Do you want to continue?")     
+messagebox.showinfo("Response", "You chose 'Yes'" if response else "You chose 'No'") 
+root = tk.Tk() root.title("Python GUI Example") root.geometry("400x400") label_name = 
+tk.Label(root, text="Name:") label_name.pack(pady=5) entry_name = tk.Entry(root) 
+entry_name.pack(pady=5)  
+label_age = tk.Label(root, text="Age:") 
+label_age.pack(pady=5) entry_age = 
+tk.Entry(root) entry_age.pack(pady=5) 
+label_gender = tk.Label(root, 
+text="Gender:") label_gender.pack(pady=5) 
+var_gender = tk.StringVar(value="Not 
+selected") radio_male = tk.Radiobutton(root, 
+text="Male", variable=var_gender, 
+value="Male") radio_male.pack() 
+radio_female = tk.Radiobutton(root, 
+text="Female", variable=var_gender, 
+value="Female") radio_female.pack() 
+var_subscribe = tk.BooleanVar(value=False) 
+checkbox_subscribe = tk.Checkbutton(root, 
+text="Subscribe to newsletter", 
+variable=var_subscribe) 
+checkbox_subscribe.pack(pady=5) 
+button_submit = tk.Button(root, 
+text="Submit", command=on_submit) 
+button_submit.pack(pady=20) button_dialog 
+= tk.Button(root, text="Open Custom 
+Dialog", command=custom_dialog) 
+button_dialog.pack(pady=10) if __name__ 
+== '__main__':  
+start_client()  
+root.mainloop()  
+Maviya shaikh 
+Roll no: 37 
+Batch-2 
+import tkinter as tk from tkinter 
+import messagebox def 
+display_text():  
+username = entry_username.get()     password = entry_password.get()     
+messagebox.showinfo("Entered Details", f"Username: {username}\nPassword: {password}")  
+root = tk.Tk() root.title("Login Form") root.geometry("300x200") 
+tk.Label(root, text="Username:").pack(pady=5) entry_username = 
+tk.Entry(root) entry_username.pack(pady=5) tk.Label(root, 
+text="Password:").pack(pady=5) entry_password = tk.Entry(root, 
+show="*") entry_password.pack(pady=5) tk.Button(root, 
+text="Submit", command=display_text).pack(pady=20)  
+root.mainloop()  
+Maviya shaikh 
+Roll no: 37 
+Batch-2 
+import tkinter as tk from tkinter 
+import messagebox def 
+check_password():  
+if entry_password.get() == "admin123":  
+login_window.destroy()         
+open_main_app()  
+else:  
+messagebox.showerror("Access Denied", "Incorrect 
+Password!") def open_main_app():     main_app = tk.Tk()  
+main_app.title("Protected Application")     main_app.geometry("300x200")     
+tk.Label(main_app, text="Welcome to the Secure App!", font=("Arial", 12)).pack(pady=20)     
+tk.Button(main_app, text="Exit", command=main_app.destroy).pack(pady=10)     
+main_app.mainloop()  
+login_window = tk.Tk() login_window.title("Login") 
+login_window.geometry("300x150") tk.Label(login_window, text="Enter 
+Password:", font=("Arial", 10)).pack(pady=5) entry_password = 
+tk.Entry(login_window, show="*") entry_password.pack(pady=5) 
+tk.Button(login_window, text="Login", 
+command=check_password).pack(pady=10)  
+login_window.mainloop()  

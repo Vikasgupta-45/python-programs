@@ -1,0 +1,120 @@
+#Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ //Write a python Program to send email to any email address.
+ import smtplib
+ from email.mime.text import MIMEText
+ from email.mime.multipart import MIMEMultipart
+ # Email details
+ sender_email = "maviya@eng.rizvi.edu.in"
+ receiver_email = "Vikasgupta4@eng.rizvi.edu.in"
+ password = "kwaf vjip dguf szmz"
+ # Compose the email
+ subject = "Subject of the Email"
+ body = "hlo this is vikas here  "
+ # Create a multipart message
+ message = MIMEMultipart()
+ message["From"] = sender_email
+ message["To"] = receiver_email
+ message["Subject"] = "learning python and sending emails "
+ # Add the body text to the email
+message.attach(MIMEText(body, "hlo this is vikas here  "))
+ # Send the email
+ try:
+    # Connect to the SMTP server
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()  # Upgrade connection to secure encrypted connection
+    server.login(sender_email, password)
+    server.sendmail(sender_email, receiver_email, message.as_string())
+    print("Email sent successfully!")
+ except Exception as e:
+    print(f"An error occurred: {e}")
+ finally:
+    server.quit() 
+  // postlab Write a program to add attachment on an email.
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ import smtplib
+ from email.mime.text import MIMEText
+ from email.mime.multipart import MIMEMultipart
+ from email.mime.base import MIMEBase
+ from email import encoders
+ # Email details
+ sender_email = "Vikasgupta4@eng.rizvi.edu.in"
+ receiver_email = "maviya@eng.rizvi.edu.in"
+ password = "fqrn hpbi spiw hyko"
+ # Compose the email
+ subject = "sending attachment along with email postlab "
+ body = "This email contains an attachment."
+ # Create a multipart message
+ message = MIMEMultipart()
+ message["From"] = sender_email
+ message["To"] = receiver_email
+ message["Subject"] = subject
+ # Add the body text
+ message.attach(MIMEText(body, "plain"))
+ # Specify the file to attach
+ file_path = "c:\\Users\\maviya\\Documents\\my_file.txt"
+ file_name = "my_file.txt"
+ # Open the file in binary mode and attach it
+ try:
+    with open(file_path, "rb") as attachment:
+        file_part = MIMEBase("application", "octet-stream")
+        file_part.set_payload(attachment.read())
+        encoders.encode_base64(file_part)
+        file_part.add_header(
+            "Content-Disposition",
+            f"attachment; filename={file_name}",
+        )
+        message.attach(file_part)
+ except Exception as e:
+    print(f"An error occurred while attaching the file: {e}")
+    exit()
+# Send the email
+ try:
+    # Connect to the SMTP server
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()  # Upgrade to a secure encrypted connection
+    server.login(sender_email, password)
+    server.sendmail(sender_email, receiver_email, message.as_string())
+    print("Email sent successfully with an attachment!")
+ except Exception as e:
+    print(f"An error occurred while sending the email: {e}")
+ finally:
+    server.quit()
+ // postlab Write a program to send multiple emails.
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ import smtplib
+ from email.mime.text import MIMEText
+ from email.mime.multipart import MIMEMultipart
+ # Email details
+ sender_email = "Vikasgupta4@eng.rizvi.edu.in"
+ password = "fqrn hpbi spiw hyko"
+ receiver_emails = ["maviya@eng.rizvi.edu.in", "hussain2023@eng.rizvi.edu.in"]  # 
+Add all recipients here
+ # Compose the email
+ subject = "Subject of the Email"
+ body = "This is the body of the email being sent to multiple recipients."
+ # Create the multipart email
+ message = MIMEMultipart()
+ message["From"] = sender_email
+ message["Subject"] = subject
+ message.attach(MIMEText(body, "plain"))
+ # Send the email to all recipients
+ try:
+    # Connect to the SMTP server
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()  # Upgrade to a secure encrypted connection
+    server.login(sender_email, password)
+    # Loop through each recipient and send the email
+    for email in receiver_emails:
+        message["To"] = email  # Update the recipient email
+        server.sendmail(sender_email, email, message.as_string())
+        print(f"Email sent successfully to {email}!")
+ except Exception as e:
+    print(f"An error occurred: {e}")
+ finally:
+    server.quit()

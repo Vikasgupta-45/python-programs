@@ -1,0 +1,248 @@
+# wap to implement data stuucture in python (stack ,queue ,ll)
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ # WAP to perform following operation on stack
+ # 1. push an element
+ # 2. pop an element
+ # 3. peep an element
+ # 4. search an element
+ # 5. Exit
+ class Stack:
+    def __init__(self):
+        self.st=[]
+    def isempty(self):
+        return self.st==[]
+    def push(self,element):
+        self.st.append(element)
+    def pop(self):
+        if self.isempty():
+            return -1
+        else:
+            return self.st.pop()
+    def peep(self):
+        n=len(self.st)
+        return self.st[n-1]
+    def search(self,element):
+        if self.isempty():
+            return -1
+        else:
+            try:
+                n=self.st.index(element)
+                return len(self.st)-n
+            except ValueError:
+                return -2
+    def display(self):
+        return self.st
+ from stack import Stack
+ #create empty  stack object
+ s=Stack()
+ # display menu
+ choice=0
+ while choice<5:
+    print("STACK OPERATIONS")
+    print("1. Push Element")
+    print("2. Pop Element")
+    print("3. Peep Element")
+    print("4. Search an Element")
+    print("5. Exit")
+    choice=int(input("Enter Your Choice"))
+    # perform task on users choice
+    if choice==1:
+        element=int(input("Enter Element :"))
+        s.push(element)
+    elif choice==2:
+        element=s.pop()
+        if element==-1:
+            print("Stack is empty")
+        else:
+            print("Popped Element :",element)
+    elif choice==3:
+        element=s.peep()
+        print("Top most element :",element)
+    elif choice==4:
+        element=int(input("Enter Element :"))
+        pos=s.search(element)
+        if pos==-1:
+            print("Stack is empty")
+        elif pos==-2:
+            print("Elemnt not found in the stack")
+        else:
+            print("Element found at position:",pos)
+    else:
+        break
+    # display the content of stack object
+    print("Stack=",s.display())
+ #queue 
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def enqueue(self, item):
+        """Add an item to the rear of the queue."""
+        self.queue.append(item)
+        print(f"Enqueued: {item}")
+    def dequeue(self):
+        """Remove an item from the front of the queue."""
+        if not self.is_empty():
+            removed_item = self.queue.pop(0)
+            print(f"Dequeued: {removed_item}")
+            return removed_item
+        else:
+            print("Queue is empty!")
+            return None
+    def front(self):
+        """Get the front item of the queue without removing it."""
+        if not self.is_empty():
+            return self.queue[0]
+        return None
+    def rear(self):
+        """Get the rear item of the queue without removing it."""
+        if not self.is_empty():
+            return self.queue[-1]
+        return None
+    def is_empty(self):
+        """Check if the queue is empty."""
+        return len(self.queue) == 0
+    def display(self):
+        """Display the current queue elements."""
+        print("Queue:", self.queue)
+ q = Queue()
+ q.enqueue(10)
+ q.enqueue(20)
+ q.enqueue(30)
+ q.display()
+ q.dequeue()
+ q.display()
+ print("Front:", q.front())
+ print("Rear:", q.rear())
+ //ll
+ # A python program to create a linked list and perform operation on list.
+ # create empty linked list
+ l1=[]
+ # add some string type to l1
+ l1.append ("Hindustan");
+ l1.append ("Bharat");
+ l1.append ("India");
+ # display the list
+ print (" Existing list : ", l1)
+ # display menu
+ choice=0;
+ while (choice<5):
+    print (" Linked list Opeartions ")
+    print (" 1. Add Element ")
+    print (" 2. Remove Element ")
+    print (" 3. Replace Element ")
+    print (" 4. Search Element ")
+    print (" 5. Exit ")
+    choice=int(input(" Enter Your choice :"))
+    # perform task depending on users choice
+    if choice==1:
+        element=(input("Enter Element : "))
+        pos=int(input("Enter Position : "))
+        l1.insert(pos, element)
+    elif choice==2:
+        try:
+            element=(input("Enter Element : "))
+            l1.remove(element)
+        except valueError:
+            print("element not found")
+    elif choice==3:
+        element=(input("Enter new Element : "))
+        pos=int(input("Enter Position : "))
+        l1.pop(pos)
+        l1.insert(pos, element)
+    elif choice==4:
+        element=(input("Enter new Element : "))
+        try:
+            pos=l1.index(element)
+            print("element found at position: ",pos)
+        except valueError:
+            print("element not found")
+    else:
+        break
+    # display element list
+    print (" List: ",l1)
+ //   postlab reverse a stack using recursion 
+#Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ def insert_at_bottom(stack, item):
+    """Helper function to insert an item at the bottom of the stack."""
+    if not stack:
+        stack.append(item)
+    else:
+        top = stack.pop()
+        insert_at_bottom(stack, item)
+        stack.append(top)
+ def reverse_stack(stack):
+    """Function to reverse the stack using recursion."""
+    if stack:
+        top = stack.pop()
+        reverse_stack(stack)
+        insert_at_bottom(stack, top)
+ # Example Usage
+ stack = [1, 2, 3, 4, 5]
+ print("Original Stack:", stack)
+ reverse_stack(stack)
+ print("Reversed Stack:", stack)
+ //  postlab implement circular queue 
+#Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ class CircularQueue:
+    def __init__(self, size):
+        """Initialize the circular queue with a fixed size."""
+        self.size = size
+        self.queue = [None] * size  # Create an empty list of fixed size
+        self.front = self.rear = -1  # Initialize front and rear to -1 (empty 
+queue)
+    def enqueue(self, item):
+        """Add an element to the queue."""
+        if (self.rear + 1) % self.size == self.front:
+            print("Queue is Full!")  # Check if the queue is full
+        else:
+            if self.front == -1:  # If inserting first element
+                self.front = 0
+            self.rear = (self.rear + 1) % self.size
+            self.queue[self.rear] = item
+            print(f"Enqueued: {item}")
+    def dequeue(self):
+        """Remove an element from the front of the queue."""
+        if self.front == -1:
+            print("Queue is Empty!")  # Check if the queue is empty
+            return None
+        removed_item = self.queue[self.front]
+        if self.front == self.rear:  # Queue becomes empty after removing last 
+element
+            self.front = self.rear = -1
+        else:
+            self.front = (self.front + 1) % self.size
+        print(f"Dequeued: {removed_item}")
+        return removed_item
+    def display(self):
+        """Display the elements of the queue."""
+        if self.front == -1:
+            print("Queue is Empty!")
+            return
+        print("Circular Queue:", end=" ")
+        i = self.front
+        while True:
+            print(self.queue[i], end=" ")
+            if i == self.rear:
+                break
+            i = (i + 1) % self.size
+        print()
+ # Example Usage
+ cq = CircularQueue(5)  # Create a circular queue of size 5
+ cq.enqueue(10)
+ cq.enqueue(20)
+ cq.enqueue(30)
+ cq.enqueue(40)
+ cq.enqueue(50)
+ cq.display()  # Display queue
+ cq.dequeue()
+ cq.dequeue()
+ cq.display()  # Display after dequeuing
+ cq.enqueue(60)
+ cq.enqueue(70)
+ cq.display()  # Display after inserting more elements

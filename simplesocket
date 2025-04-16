@@ -1,0 +1,138 @@
+#Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ # A TCP/IP server that sends messge to client
+import socket
+ host='localhost'
+ port=5000
+ s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+ print("Socket created")
+ s.bind((host,port))
+ s.listen()
+ print("waiting for connections...")
+ c,addr=s.accept()
+ print("Connection from:",str(addr))
+ c.send(b"Hellow client ! How are you")
+ msg="Bye!"
+ c.send(msg.encode())
+ c.close()
+ # A TCP/IP client that recieves messge from server
+ import socket
+ host='localhost'
+ port=5000
+ s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+ s.connect((host,port))
+ msg=s.recv(1024)
+ while msg:
+    print("Recieved :"+msg.decode())
+    msg=s.recv(1024)
+ # disconnect the server
+ s.close()
+ # post lab Write a python program to create simple socket for file sending 
+between server and client.
+ #Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ Server  :
+ import socket
+HOST = "0.0.0.0"  # Listen on all available network interfaces
+ PORT = 5001  # Port to listen on
+ def send_file(filename, conn):
+    try:
+        with open(filename, "rb") as file:
+            data = file.read()
+            conn.sendall(data)
+        print("File sent successfully!")
+    except FileNotFoundError:
+        print("File not found!")
+        conn.sendall(b"ERROR: File not found")
+ def start_server():
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((HOST, PORT))
+    server_socket.listen(1)
+    print(f"[*] Server listening on {HOST}:{PORT}...")
+    conn, addr = server_socket.accept()
+    print(f"[+] Connection established from {addr}")
+    filename = "testfile.txt"  # File to send (ensure this exists in the server 
+folder)
+    send_file(filename, conn)
+    conn.close()
+    server_socket.close()
+ if __name__ == "__main__":
+    start_server()-------
+Client:
+ import socket
+ SERVER_IP = "127.0.0.1"  # Change this to the server's IP if running on a 
+different machine
+ PORT = 5001  # Same port as the server
+ def receive_file(filename):
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((SERVER_IP, PORT))
+    print(f"[*] Connected to server at {SERVER_IP}:{PORT}")
+    with open(filename, "wb") as file:
+        while True:
+            data = client_socket.recv(1024)
+            if not data:
+                break
+            file.write(data)
+    print(f"[+] File received successfully and saved as '{filename}'")
+    client_socket.close()
+ if __name__ == "__main__":
+    receive_file("received_testfile.txt")
+ # Write a python program to create simple socket for basic information exchange 
+between server
+ and client till clint/server type bye.
+#Name:Shaikh Maviya 
+#UIN: 231P050
+ #Roll No: 37
+ Server:
+ import socket
+ HOST = "0.0.0.0"  # Listen on all available network interfaces
+ PORT = 5002  # Port to listen on
+ def start_server():
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((HOST, PORT))
+    server_socket.listen(1)
+    print(f"[*] Server listening on {HOST}:{PORT}...")
+    conn, addr = server_socket.accept()
+    print(f"[+] Connection established with {addr}")
+    while True:
+        client_message = conn.recv(1024).decode()
+        if client_message.lower() == "bye":
+            print("[Client]: bye")
+            print("[+] Chat ended by client.")
+            break
+        print(f"[Client]: {client_message}")
+        server_message = input("[Server]: ")
+        conn.sendall(server_message.encode())
+        if server_message.lower() == "bye":
+            print("[+] Chat ended by server.")
+            break
+    conn.close()
+    server_socket.close()
+ if __name__ == "__main__":
+    start_server()
+ client:
+ import socket
+ SERVER_IP = "127.0.0.1"  # Change to server's IP if running on a different 
+machine
+ PORT = 5002  # Same port as the server
+ def start_client():
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((SERVER_IP, PORT))
+    print(f"[*] Connected to server at {SERVER_IP}:{PORT}")
+    while True:
+        client_message = input("[Client]: ")
+        client_socket.sendall(client_message.encode())
+        if client_message.lower() == "bye":
+            print("[+] Chat ended by client.")
+            break
+        server_message = client_socket.recv(1024).decode()
+        if server_message.lower() == "bye":
+            print("[Server]: bye")
+            print("[+] Chat ended by server.")
+            break
+        print(f"[Server]: {server_message}")
+    client_socket.close()
+ if __name__ == "__main__":
+    start_client()

@@ -1,0 +1,139 @@
+# NAME:MAVIYA SHAIKH  
+# UIN 231P050 
+# ROLL NO 37 
+ 
+AIM: Program You're going to write an interactive calculator! 
+def parse_input(user_input): 
+    input_list = user_input.split() 
+    if len(input_list) != 3: 
+        raise Exception("Input must consist of three elements (e.g., '1 + 2')") 
+    n1, op, n2 = input_list 
+    try: 
+        n1 = float(n1) 
+        n2 = float(n2) 
+            if not (n1.is_integer() and n2.is_integer()): 
+            raise Exception("One of the two operands is not an integer") 
+    except ValueError: 
+        raise Exception("Both inputs must be numbers") 
+    return n1, op, n2 
+def calculate(n1, op, n2): 
+    if op == '+': 
+        return n1 + n2 
+    elif op == '-': 
+        return n1 - n2 
+    elif op == '*': 
+        return n1 * n2 
+    elif op == '/': 
+        if n2 == 0: 
+            raise Exception("Division by zero is not allowed") 
+        return n1 / n2 
+    else: 
+        raise Exception(f"'{op}' is not a valid operator. Use +, -, *, or /") 
+while True: 
+    user_input = input('>>> ') 
+    if user_input.lower() == "quit": 
+        break 
+    try: 
+        n1, op, n2 = parse_input(user_input) 
+        result = calculate(n1, op, n2) 
+        print(result) 
+    except Exception as e: 
+        print(f"Error: {e}") 
+ 
+ 
+ 
+# NAME:MAVIYA SHAIKH  
+# UIN 231P050 
+# ROLL NO 37 
+ 
+# AIM: WAP to create a user-defined exception where the program will ask the user to input a 
+# number again and again until the user enters the correct stored number 
+ 
+class IncorrectNumberError(Exception): 
+    def __init__(self, message="The number you entered is incorrect!"): 
+        self.message = message 
+        super().__init__(self.message) 
+def number_checker(): 
+       correct_number = 42 
+        while True: 
+        try: 
+                     user_input = int(input("Please enter the number: ")) 
+                       if user_input != correct_number: 
+                         raise IncorrectNumberError 
+      else: 
+                print(f"Congratulations! {correct_number} is the correct number!") 
+                break   
+      except IncorrectNumberError as e: 
+            print(e) 
+            print("Please try again.\n") 
+      except ValueError: 
+            print("Invalid input! Please enter a valid integer.\n") 
+if __name__ == "__main__": 
+    print("Welcome! Try to guess the correct number.") 
+    number_checker() 
+ 
+ 
+# NAME:MAVIYA SHAIKH  
+# UIN 231P050 
+# ROLL NO 37 
+ 
+# AIM:Write a program in Python that validates names and age as entered by the user to determine 
+# whether the person can cast vote or not using exception handling. 
+ 
+class InvalidAgeError(Exception): 
+    pass 
+class InvalidNameError(Exception): 
+    pass 
+def validate_name(name): 
+    if not name.replace(" ", "").isalpha(): 
+        raise InvalidNameError("Invalid name! Name should contain only alphabets.") 
+def validate_age(age): 
+    if age < 0: 
+        raise InvalidAgeError("Age cannot be negative!") 
+    elif age < 18: 
+        raise InvalidAgeError("You are not eligible to vote. Must be at least 18 years old.") 
+def main(): 
+    try: 
+        name = input("Enter your name: ") 
+        validate_name(name)  # Validate name 
+        age = int(input("Enter your age: ")) 
+        validate_age(age)  # Validate age 
+        print(f"Hello {name}, you are eligible to vote!") 
+        except InvalidNameError as e: 
+        print(e) 
+    except InvalidAgeError as e: 
+        print(e) 
+    except ValueError: 
+        print("Invalid input! Age should be a valid number.") 
+if __name__ == "__main__": 
+    main() 
+ 
+ 
+# NAME:MAVIYA SHAIKH  
+# UIN 231P050 
+# ROLL NO 37 
+# AIM: Write a Program in python to demonstrate user defined exception. (month no.is input 1-12, above 
+# 12 is exception). 
+class InvalidMonthError(Exception): 
+    pass 
+def get_month_name(month_no): 
+    months = { 
+        1: "January", 2: "February", 3: "March", 4: "April", 
+        5: "May", 6: "June", 7: "July", 8: "August", 
+        9: "September", 10: "October", 11: "November", 12: "December" 
+    } 
+    if month_no not in months: 
+        raise InvalidMonthError("Invalid month number! Please enter a number between 1 and 12.") 
+    return months[month_no] 
+def main(): 
+    try: 
+        month_no = int(input("Enter a month number (1-12): ")) 
+        month_name = get_month_name(month_no) 
+        print(f"The month is: {month_name}") 
+        except InvalidMonthError as e: 
+        print(e) 
+    except ValueError: 
+        print("Invalid input! Please enter a numeric value.") 
+if __name__ == "__main__": 
+    main() 
+ 
